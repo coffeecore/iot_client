@@ -1,0 +1,32 @@
+{
+    "configurationClient":
+    {
+        "id"        : "confclient",
+        "connection":
+        {
+            "address"   : "locahost",
+            "port"      : "4000"
+        }
+    },
+    "configurationServer":
+    [
+        {
+            "id"        : "0",
+            "name"      : "nomcarte",
+            "connection":
+            {
+                "address"   : "192.168.2.4",
+                "port"      : "8080"
+            }
+        },
+        {
+            "id"        : "2",
+            "name"      : "nomcarte2",
+            "connection":
+            {
+                "address"   : "192.168.2.5",
+                "port"      : "8081"
+            }
+        }
+    ]
+}
