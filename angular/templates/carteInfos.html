@@ -1,17 +1,15 @@
-<div ng-if="selectedCarte">
-    <ul class="list-unstyled">
-        <li ng-repeat="gpio in selectedCarte">
-            <form class="form-group" ng-submit="postGpios()">
-                {{gpio.name}}
+<div ng-if="thing">
+    <form class="form-group" ng-submit="putThing()">
+        {{ thing.name }}
+        <input type="text" class="form-control" ng-model="thing.name"/>
+        <input type="text" class="form-control" ng-model="thing.description"/>
+        <input type="text" class="form-control" ng-model="thing.author"/>
+        <ul class="list-unstyled">
+            <li ng-repeat="gpio in thing.gpios">
                 <input type="text" class="form-control" ng-model="gpio.name"/>
                 <input type="text" class="form-control" ng-model="gpio.pin"/>
-                <input type="submit" value="Save" class="btn btn-default">
-                <!-- <input type="text" ng-model="gpio.name"/>
-                <input type="text" ng-model="gpio.name"/>
-                <input type="text" ng-model="gpio.name"/>
-                <input type="text" ng-model="gpio.name"/>
-                <input type="text" ng-model="gpio.name"/> -->
-            </form>
-        </li>
-    </ul>
+            </li>
+        </ul>
+        <input type="submit" value="Save" class="btn btn-default">
+    </form>
 </div>

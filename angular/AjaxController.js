@@ -1,21 +1,21 @@
-var myApp = angular.module('myApp',[]);
+var iotClient = angular.module('iotClient',[]);
 
-myApp.controller('AjaxController', ['$scope', '$http', function($scope, $http)
+iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $http)
 {
-    // $scope.carteList = conf.configurationServer;
-
-    // $scope.gpios = jstores.gpios;
-
     $http.get('/conf/connections.json')
-        .success(function(data){
-            $scope.fileConf = data;
-            $scope.carteList = $scope.fileConf.configurationServer;
-    }).error(function(data, status){
-            console.log(data);
-            console.log(status)
+    .success(function(data)
+    {
+        console.log('SUCCESS');
+        $scope.fileConf = data;
+        $scope.carteList = $scope.fileConf.configurationServer;
+    })
+    .error(function(data, status)
+    {
+        console.log('ERROR');
+        console.log(data);
+        console.log(status)
     });
 
-    console.log($scope.carteList);
 
     $scope.templates = 
     [
@@ -30,53 +30,52 @@ myApp.controller('AjaxController', ['$scope', '$http', function($scope, $http)
     ];
     $scope.template = $scope.templates[0];
 
-
-
-    // $scope.loadCarte = function()
-    // {
-    //     alert('CLICKUZ')
-    //     $scope.template = $scope.templates[1];
-    //     console.log($scope.template)
-    // }
-    $scope.getGpios = function(address, port)
+    $scope.getThing = function(address, port)
     {
         $scope.conf = {};
         $scope.conf.address = address;
         $scope.conf.port = port;
 
-        // $http.get('http://'+address+':'+port+'/').
-        $http.get('http://'+address+':'+port+'/thing/gpios').
-        success(function(data, status, headers, config)
+        $http.get('http://'+address+':'+port+'/thing')
+        .success(function(data, status, headers, config)
         {
             console.log('SUCCESS');
-
-            // data = JSON.parse(data);
+            console.log(status)
             console.log(data)
-            // data = data.gpios
-
-            $scope.selectedCarte = data;
-            
-            console.log($scope.selectedCarte)
-            // $scope.selectedCarte = data.gpios;
-            // console.log(status)
-            $scope.template = $scope.templates[0];
-        }).
-        error(function(data, status, headers, config)
+            $scope.thing = data;
+        })
+        .error(function(data, status, headers, config)
         {
-            console.log('ERROR');
+            console.log('ERROR')
+            console.log(data);
+            console.log(status);
         });
-    };
+    }
 
-    $scope.postGpios = function(data)
+
+    $scope.putThing = function()
     {
-        $http.post('http://'+$scope.conf.address+':'+$scope.conf.port+'/thing/gpios', data).
-        success(function(data, status, headers, config)
+        $http(
+            {
+                method: 'PUT',
+                url: 'http://'+$scope.conf.address+':'+$scope.conf.port+'/thing',
+                headers:
+                {
+                    'Content-Type': 'application/json'
+                },
+                data:
+                {
+                    "thing" : this.thing
+                }
+            }
+        )
+        .success(function(data, status, headers, config)
         {
             console.log('SUCCESS');
             console.log(data);
             console.log(status);
-        }).
-        error(function(data, status, headers, config)
+        })
+        .error(function(data, status, headers, config)
         {
             console.log('ERROR')
             console.log(data);
