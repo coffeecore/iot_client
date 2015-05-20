@@ -5,7 +5,7 @@
         "connection":
         {
             "address"   : "locahost",
-            "port"      : "4000"
+            "port"      : "3500"
         }
     },
     "configurationServer":

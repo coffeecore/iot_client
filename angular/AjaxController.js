@@ -2,14 +2,20 @@ var myApp = angular.module('myApp',[]);
 
 myApp.controller('AjaxController', ['$scope', '$http', function($scope, $http)
 {
-    $scope.carteList = conf.configurationServer;
+    // $scope.carteList = conf.configurationServer;
 
     // $scope.gpios = jstores.gpios;
 
-    // $http({method: 'POST', url: '/conf/aaa.json'})
-    //     .success(function(data){
-    //         console.log(data);
-    // });
+    $http.get('/conf/connections.json')
+        .success(function(data){
+            $scope.fileConf = data;
+            $scope.carteList = $scope.fileConf.configurationServer;
+    }).error(function(data, status){
+            console.log(data);
+            console.log(status)
+    });
+
+    console.log($scope.carteList);
 
     $scope.templates = 
     [
@@ -23,6 +29,7 @@ myApp.controller('AjaxController', ['$scope', '$http', function($scope, $http)
         }
     ];
     $scope.template = $scope.templates[0];
+
 
 
     // $scope.loadCarte = function()
@@ -42,8 +49,10 @@ myApp.controller('AjaxController', ['$scope', '$http', function($scope, $http)
         success(function(data, status, headers, config)
         {
             console.log('SUCCESS');
-            data = JSON.parse(data);
+
+            // data = JSON.parse(data);
             console.log(data)
+            // data = data.gpios
 
             $scope.selectedCarte = data;
             

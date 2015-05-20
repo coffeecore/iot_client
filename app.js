@@ -8,7 +8,7 @@ var app = express();
 
 // var client = request.createClient('http://localhost:3000/');
 
-var conf = require('./conf/connections.json');
+// var conf = require('./conf/connections.json');
 
 /*{"configurationServer":
     [
@@ -54,13 +54,23 @@ app.use('/conf', express.static('conf'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+// app.get('/conf/aaa.js', function(req, res)
+// {
+    
+//     res.status(res.statusCode).json(res);
+//     // res.status('404').render('404', result);
+
+
+//   // ClientRender.aff('/thing', 'index', 'Titre de ma page', res, 0, 'get');  
+// })
+
 app.get('/', function(req, res)
 {
     var result = {
         "title": 'First titre', 
         "data":
         [
-            {"conf": conf}
+            // {"conf": conf}
         ]
     };
     res.status(res.statusCode).render('index', result);
@@ -70,7 +80,7 @@ app.get('/', function(req, res)
   // ClientRender.aff('/thing', 'index', 'Titre de ma page', res, 0, 'get');  
 })
 
-app.get('/:carte/:methode/:type', function(req, res)
+/*app.get('/:carte/:methode/:type', function(req, res)
 {
     console.log('methode '+req.params.methode);
     console.log('carte '+req.params.carte);
@@ -129,9 +139,9 @@ app.get('/:carte/:methode/:type', function(req, res)
 
     //     console.log("The file was saved!");
     // }); 
-});
+});*/
 
-var server = app.listen(conf.configurationClient.connection.port, function () {
+var server = app.listen(3500, function () {
 
     var host = server.address().address;
     var port = server.address().port;
