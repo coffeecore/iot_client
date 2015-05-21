@@ -44,6 +44,7 @@ app.post('/modifiedconf', function(req, res)
     // console.log(conf)
 
     var confCarte = req.body.thing;
+
     conf.configurationServer.push(confCarte);
 
     conf = JSON.stringify(conf);

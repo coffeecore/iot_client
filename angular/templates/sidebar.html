@@ -1,0 +1,39 @@
+<h1>IOT Client</h1>
+<ul class="list-unstyled">
+    <li>
+        <button class="btn btn-default" ng-click="" data-toggle="modal" data-target="#myModal">+ Ajouter une carte</button>
+    </li>
+    <li ng-repeat="carte in cartesList">
+        <!-- <button class="btn btn-default" ng-click="$emit('selectCarte', [carte.connection.address, carte.connection.port])">{{carte.name}}</button> -->
+        <button class="btn btn-default" ng-click="$emit('selectCarte', [carte.connection.address, carte.connection.port])">{{carte.name}}</button>
+        <ul ng-if="thing.gpios">
+            <li ng-repeat="gpio in thing.gpios | filter : thing.slug : comparator">
+                <a href="#" ng-click="$emit('selectGpio', gpio.slug)">{{ gpio.name }}</a>
+            </li>
+        </ul>
+    </li> 
+</ul>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" ng-submit="createCarte($event)" ng-model="creercarte">
+                    <input type="text" class="form-control" ng-model="creercarte.id"/>
+                    <input type="text" class="form-control" ng-model="creercarte.name"/>
+                    <input type="text" class="form-control" ng-model="creercarte.connection.address"/>
+                    <input type="text" class="form-control" ng-model="creercarte.connection.port"/>
+                    <input type="submit" value="Creer" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

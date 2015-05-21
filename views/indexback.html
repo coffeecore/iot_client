@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="/angular/public/bootstrap.3.3.4/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="/angular/AjaxController.js"></script>
+    </head>
+    <body ng-app="iotClient">
+        <div class="container-fluid" ng-controller="AjaxController">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- <form class="form-group" ng-submit="createCarte($event)" ng-model="creercarte">
+                        Creer Carte
+                        <input type="text" class="form-control" ng-model="creercarte.id"/>
+                        <input type="text" class="form-control" ng-model="creercarte.name"/>
+                        <input type="text" class="form-control" ng-model="creercarte.connection.address"/>
+                        <input type="text" class="form-control" ng-model="creercarte.connection.port"/>
+                        <input type="submit" value="Creer" />
+                    </form> -->
+                    <ul class="list-unstyled">
+                        <li ng-repeat="carte in cartesList">
+                            <button class="btn btn-default" ng-click="getThing(carte.connection.address, carte.connection.port)">{{carte.name}}</button>
+                            <ul ng-if="thing.gpios">
+                                <li ng-repeat="gpio in thing.gpios">
+                                    <!-- <a href="#" ng-click="getGpio(carte.connection.address, carte.connection.port, true, gpio.slug)" >{{ gpio.name }}</a> -->
+                                    <!-- {{ gpio.name }} -->
+                                    <a href="#" ng-click="getGpio(gpio.slug)" >{{ gpio.name }}</a>
+                                </li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div ng-include="template.url"></div>
+                </div>
+            </div>
+            <!-- <button class="btn btn-default" ng-click="postGpio()">addGPIO</button> -->
+        </div>
+
+        
+    </body>
+</html>
