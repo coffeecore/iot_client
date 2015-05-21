@@ -1,9 +1,9 @@
-<div ng-if="gpios">
-    <form class="form-group" ng-submit="putGpio()">
+<div ng-if="thing.gpios">
+    <form class="form-group" ng-submit="putGpio(slugGpio)">
         {{ thing.name }}
         <ul class="list-unstyled">
             <h2>GPIO</h2>
-            <li ng-repeat="gpio in gpios">
+            <li ng-repeat="gpio in thing.gpios | filter:{slug: slugGpio}">
                 <h3>{{gpio.name}}</h3>
                 <input type="text" class="form-control" ng-model="gpio.name"/>
                 <input type="text" class="form-control" ng-model="gpio.pin"/>

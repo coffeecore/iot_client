@@ -7,23 +7,28 @@
         <ul class="list-unstyled">
             <h2>GPIO</h2>
             <li ng-repeat="gpio in thing.gpios">
-                <h3>{{gpio.name}}</h3>
-                <input type="text" class="form-control" ng-model="gpio.name"/>
-                <input type="text" class="form-control" ng-model="gpio.pin"/>
+                <h3>{{ gpio.name }}</h3>
+                <p>{{ gpio.name }}</p>
+                <p>{{ gpio.pin }}</p>
+                <!-- <input type="text" class="form-control" ng-model="gpio.name"/>
+                <input type="text" class="form-control" ng-model="gpio.pin"/> -->
                 <h2>EVENT</h2>
                 <ul class="list-unstyled">
                     <li ng-repeat="event in gpio.events">
-                        <input type="text" class="form-control" ng-model="event.name"/>
+                        <p>{{ event.name }}</p>
+                        <!-- <input type="text" class="form-control" ng-model="event.name"/> -->
                     </li>
                 </ul>
                 <h2>JOB</h2>
                 <ul class="list-unstyled">
                     <li ng-repeat="job in gpio.jobs">
-                        <input type="text" class="form-control" ng-model="job.name"/>
+                        <p>{{ job.name }}
+                        <!-- <input type="text" class="form-control" ng-model="job.name"/> -->
                     </li>
                 </ul>
             </li>
         </ul>
         <input type="submit" value="Save" class="btn btn-default">
     </form>
+    {{ thing.gpios | filter:{slug: slugGpio}:true | limitTo:1 }}
 </div>

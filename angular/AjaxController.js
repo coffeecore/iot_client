@@ -1,6 +1,6 @@
 var iotClient = angular.module('iotClient',[]);
 
-iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $http)
+iotClient.controller('AjaxController', ['$scope', '$http', '$filter', function($scope, $http, $filter)
 {
     $http.get('/conf/connections.json')
     .success(function(data)
@@ -38,6 +38,7 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
             url: $scope.conf.templateDir+'error.html'
         }
     };
+
     // $scope.template = $scope.templates['aaa'];
 
     $scope.createCarte = function()
@@ -82,6 +83,7 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
             if(200 == data.status_code)
             {
                 $scope.thing = data.data;
+
                 $scope.template = $scope.templates['carteInfos'];
             }
             else
@@ -106,7 +108,77 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
         });
     }
 
-    $scope.getGpio = function(address, port, slug)
+    $scope.getGpio = function(slug)
+    {
+        // console.log($scope.conf.length)
+        // $scope.conf = {};
+        // $scope.conf.address = address;
+        // $scope.conf.port = port;
+
+        console.log(slug)
+
+        var i = 0;
+
+        while($scope.thing.gpios[i].slug != slug)
+        {
+            i++;
+        }
+
+        console.log($scope.thing.gpios[i]);
+        $scope.slugGpio = $scope.thing.gpios[i].slug
+
+        var url;
+
+        // if(undefined == slug)
+        // {
+        //     // url = 'http://'+address+':'+port+'/thing/gpio';
+        // }
+        // else
+        // {            
+            // url = 'http://'+address+':'+port+'/thing/gpio/'+slug;
+        // }
+
+
+        // console.log(url)
+        // $http.get(url)
+        // .success(function(data, status, headers, config)
+        // {
+        //     console.log('SUCCESS');
+        //     console.log(status)
+        //     console.log(data)
+
+        //     if(200 == data.status_code)
+        //     {
+        //         $scope.gpios = data.data;
+        //         if(template)
+        //         {
+                    $scope.template = $scope.templates['gpioInfos'];
+        //         }
+        //     }
+        //     else
+        //     {
+        //         $scope.urlerror = {
+        //             "status_code" : data.status_code,
+        //             "message" : data.message
+        //         }
+        //         $scope.template = $scope.templates['error'];
+        //     }
+        // })
+        // .error(function(data, status, headers, config)
+        // {
+        //     console.log('ERROR')
+        //     console.log(data);
+        //     console.log(status);
+        //     $scope.urlerror = {
+        //         "status_code" : status,
+        //         "message" : data
+        //     } 
+        //     $scope.template = $scope.templates['error'];
+
+        // });
+    }
+
+    /*$scope.getGpio = function(address, port, template, slug)
     {
         // console.log($scope.conf.length)
         $scope.conf = {};
@@ -138,7 +210,10 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
                 if(200 == data.status_code)
                 {
                     $scope.gpios = data.data;
-                    $scope.template = $scope.templates['gpioInfos'];
+                    if(template)
+                    {
+                        $scope.template = $scope.templates['gpioInfos'];
+                    }
                 }
                 else
                 {
@@ -161,7 +236,7 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
                 $scope.template = $scope.templates['error'];
 
             });
-    }
+    }*/
 
     $scope.getGpioEvent = function(address, port, slug, id)
     {
@@ -314,9 +389,11 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
             console.log(status);
         });
     };
-    $scope.putGpio = function()
+    $scope.putGpio = function(slugGpio)
     {
-        // console.log(this.gpios)
+        
+        var aaa = $filter('filter')(this.thing.gpios, {slug:slugGpio}, true)
+        console.log(aaa)
         $http(
             {
                 method: 'PUT',
@@ -327,7 +404,7 @@ iotClient.controller('AjaxController', ['$scope', '$http', function($scope, $htt
                 },
                 data:
                 {
-                    "gpio" : this.gpios
+                    "gpio" : aaa
                 }
             }
         )

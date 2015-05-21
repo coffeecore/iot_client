@@ -21,10 +21,11 @@
                     <ul class="list-unstyled">
                         <li ng-repeat="carte in cartesList">
                             <button class="btn btn-default" ng-click="getThing(carte.connection.address, carte.connection.port)">{{carte.name}}</button>
-                            <ul ng-if="thing">
+                            <ul ng-if="thing.gpios">
                                 <li ng-repeat="gpio in thing.gpios">
-                                    <a href="#" ng-click="getGpio(carte.connection.address, carte.connection.port, gpio.slug)" >{{ gpio.name }}</a>
+                                    <!-- <a href="#" ng-click="getGpio(carte.connection.address, carte.connection.port, true, gpio.slug)" >{{ gpio.name }}</a> -->
                                     <!-- {{ gpio.name }} -->
+                                    <a href="#" ng-click="getGpio(gpio.slug)" >{{ gpio.name }}</a>
                                 </li>
                             </ul>
                         </li> 
