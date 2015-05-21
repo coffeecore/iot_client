@@ -10,9 +10,23 @@
         <div class="container-fluid" ng-controller="AjaxController">
             <div class="row">
                 <div class="col-md-3">
+                    <!-- <form class="form-group" ng-submit="createCarte($event)" ng-model="creercarte">
+                        Creer Carte
+                        <input type="text" class="form-control" ng-model="creercarte.id"/>
+                        <input type="text" class="form-control" ng-model="creercarte.name"/>
+                        <input type="text" class="form-control" ng-model="creercarte.connection.address"/>
+                        <input type="text" class="form-control" ng-model="creercarte.connection.port"/>
+                        <input type="submit" value="Creer" />
+                    </form> -->
                     <ul class="list-unstyled">
-                        <li ng-repeat="carte in carteList">
+                        <li ng-repeat="carte in cartesList">
                             <button class="btn btn-default" ng-click="getThing(carte.connection.address, carte.connection.port)">{{carte.name}}</button>
+                            <ul ng-if="thing">
+                                <li ng-repeat="gpio in thing.gpios">
+                                    <a href="#" ng-click="getGpio(carte.connection.address, carte.connection.port, gpio.slug)" >{{ gpio.name }}</a>
+                                    <!-- {{ gpio.name }} -->
+                                </li>
+                            </ul>
                         </li> 
                     </ul>
                 </div>
@@ -20,6 +34,7 @@
                     <div ng-include="template.url"></div>
                 </div>
             </div>
+            <!-- <button class="btn btn-default" ng-click="postGpio()">addGPIO</button> -->
         </div>
 
         
