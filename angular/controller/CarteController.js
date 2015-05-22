@@ -23,12 +23,10 @@ iotClient.controller('CarteController', [
 
             if(undefined != $scope.thing.status_code)
             {
-                alert('UZ')
                 Template.change('error', $scope)
             }
             else
             {
-                alert('UZUZ')
                 Template.change('carteInfos', $scope)
             }
         })

@@ -87,7 +87,6 @@ iotClient.controller('SidebarController', ['$scope', '$http', '$filter', '$rootS
     })
      $rootScope.$on('putThing', function(event, arg)
      {
-        alert('FUCK')
         Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
             data.connection = $scope.fileConf.configurationServer[0].connection
             $scope.thing[0].name = arg;
@@ -96,7 +95,6 @@ iotClient.controller('SidebarController', ['$scope', '$http', '$filter', '$rootS
     })
      $rootScope.$on('putGpio', function(event, arg)
      {
-        alert('FUCKKK')
         Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
             // data.connection = $scope.fileConf.configurationServer[0].connection
 
