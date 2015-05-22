@@ -1,10 +1,11 @@
 <div ng-if="thing">
-    <div class="raw">
-        <h1 class="col-md-10">{{ thing.name }}</h1>
-        <button class="btn btn-default col-md-2" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>
-    </div>
 
-    <p>{{ thing.description }}</p>
+    <div class="row">
+         <h1 class="col-md-10">{{ thing.name }}</h1>
+        <button class="btn btn-default col-md-2" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>       
+    </div>
+    <div class="row">
+     <p>{{ thing.description }}</p>
 
     <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -29,7 +30,10 @@
             </tr>
         </tbody>
       </table>
+    </div>       
     </div>
+
+
 
 
                     <!--ul class="list-unstyled">
