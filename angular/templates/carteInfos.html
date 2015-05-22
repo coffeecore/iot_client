@@ -1,7 +1,9 @@
 <div ng-if="thing">
-    <button class="btn btn-default" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>
+    <div class="raw">
+        <h1 class="col-md-10">{{ thing.name }}</h1>
+        <button class="btn btn-default col-md-2" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>
+    </div>
 
-    <h1>{{ thing.name }}</h1>
     <p>{{ thing.description }}</p>
 
     <div class="panel panel-default">
@@ -85,22 +87,34 @@
         </ul>
         <input type="submit" value="Save" class="btn btn-default">
     </form-->
-    {{ thing.gpios | filter:{slug: slugGpio}:true | limitTo:1 }}
+    <!--{{ thing.gpios | filter:{slug: slugGpio}:true | limitTo:1 }}-->
 </div>
 <div class="modal fade" id="edit_carte_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Editer la carte</h4>
             </div>
             <div class="modal-body">
                 <form class="form-group" ng-submit="putThing(); $emit('putThing', thing.name);">
-                    {{ thing.name }}
-                    <input type="text" class="form-control" ng-model="thing.name"/>
-                    <input type="text" class="form-control" ng-model="thing.description"/>
-                    <input type="text" class="form-control" ng-model="thing.author"/>
-                    <input type="submit" value="Save" class="btn btn-default">
+
+                    <div class="form-group">
+                        <label for="thing_name_edit">Nom</label>
+                        <input type="text" class="form-control" id="thing_name_edit" placeholder="Nom" ng-model="thing.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="thing_address_edit">Adresse</label>
+                        <input type="text" class="form-control" id="thing_address_edit" placeholder="Description" ng-model="thing.description">
+                    </div>
+                    <div class="form-group">
+                        <label for="thing_author_edit">Auteur</label>
+                        <input type="text" class="form-control" id="thing_author_edit" placeholder="Auteur" ng-model="thing.author">
+                    </div>
+
+                    <div class="form-group text-right">
+                        <input type="submit" value="Save" class="btn btn-success">
+                    </div>
                 </form>
             </div>
         </div>
