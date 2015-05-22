@@ -2,6 +2,7 @@
     <div ng-repeat="gpio in thing.gpios | filter:{slug: slugGpio}">
         <div class="col-md-7">
             <h1 class="col-md-10">{{ gpio.name }}</h1>
+            <p class="strong">Valeur : {{ gpio.val }}</p>
         </div>
         
         <div class="col-md-2">
