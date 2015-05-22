@@ -1,11 +1,15 @@
 <div ng-if="thing">
 
-    <div class="row">
-         <h1 class="col-md-10">{{ thing.name }}</h1>
-        <button class="btn btn-default col-md-2" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>       
+    <div class="col-md-7">
+        <h1 class="col-md-10">{{ thing.name }}</h1>
     </div>
-    <div class="row">
-     <p>{{ thing.description }}</p>
+    
+    <div class="col-md-2">
+        <button style="margin-top:20px" class="btn btn-default col-md-2" ng-click="" data-toggle="modal" data-target="#edit_carte_modal">Editer la carte</button>
+    </div>    
+
+<div class="col-md-9">
+    <p>{{ thing.description }}</p>
 
     <div class="panel panel-default">
       <!-- Default panel contents -->
@@ -30,9 +34,8 @@
             </tr>
         </tbody>
       </table>
-    </div>       
     </div>
-
+</div>
 
 
 
@@ -93,6 +96,7 @@
     </form-->
     <!--{{ thing.gpios | filter:{slug: slugGpio}:true | limitTo:1 }}-->
 </div>
+
 <div class="modal fade" id="edit_carte_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
