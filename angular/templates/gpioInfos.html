@@ -1,5 +1,5 @@
 <div ng-if="thing.gpios">
-    <form class="form-group" ng-submit="putGpio(slugGpio)">
+    <form class="form-group" ng-submit="putGpio(slugGpio); $emit('putGpio', gpio);">
         {{ thing.name }}
         <ul class="list-unstyled">
             <h2>GPIO</h2>

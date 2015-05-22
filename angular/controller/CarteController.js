@@ -61,4 +61,10 @@ iotClient.controller('CarteController', [
         console.log(this.thing)
     }
 
+    $scope.putGpio = function(slug)
+    {
+        Thing.putGpio(slug, $scope, this.gpio);
+        console.log(this.gpio)
+    }
+
 }]);

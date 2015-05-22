@@ -81,12 +81,39 @@ iotClient.controller('SidebarController', ['$scope', '$http', '$filter', '$rootS
     }
 
 
+    $rootScope.$on('selectCarte', function(event, arg)
+    {
+        $scope.ok = true
+    })
      $rootScope.$on('putThing', function(event, arg)
      {
         alert('FUCK')
         Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
             data.connection = $scope.fileConf.configurationServer[0].connection
             $scope.thing[0].name = arg;
+            console.log($scope.thing)
+        })
+    })
+     $rootScope.$on('putGpio', function(event, arg)
+     {
+        alert('FUCKKK')
+        Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
+            // data.connection = $scope.fileConf.configurationServer[0].connection
+
+            $scope.$digest(function()
+            {
+                if(undefined != arg)
+                {
+                    var i = 0;
+                    while(arg.name != $scope.thing[0].gpios[i].name && i<$scope.thing[0].gpios.length)
+                    {
+                        i++;
+                    }
+                    $scope.thing[0].gpios[i].name = arg.name;
+                    
+                }
+            })
+
             console.log($scope.thing)
         })
     })

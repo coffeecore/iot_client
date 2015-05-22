@@ -25,7 +25,7 @@ var templates =
         }
     };
 
-iotClient.factory('Thing', function ($http) {
+iotClient.factory('Thing', function ($http, $filter) {
 
     var conf = {};
 
@@ -121,6 +121,43 @@ iotClient.factory('Thing', function ($http) {
             }
 
             scope.slugGpio = scope.thing.gpios[i].slug
+        },
+        putGpio: function(slug, scope, gpio)
+        {
+            
+            var gpio = $filter('filter')(scope.thing.gpios, {slug:slug}, true)
+            console.log(gpio)
+            $http(
+                {
+                    method: 'PUT',
+                    url: 'http://'+conf.address+':'+conf.port+'/thing/gpio',
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
+                    data:
+                    {
+                        "gpio" : gpio
+                    }
+                }
+            )
+            .success(function(data, status, headers, config)
+            {
+                console.log('SUCCESS');
+                console.log(data);
+                console.log(status);
+            })
+            .error(function(data, status, headers, config)
+            {
+                console.log('ERROR')
+                console.log(data);
+                console.log(status);
+                $scope.urlerror = {
+                    "status_code" : status,
+                    "message" : data
+                } 
+                $scope.template = $scope.templates['error'];
+            });
         }
     };
 });
