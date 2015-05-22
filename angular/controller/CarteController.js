@@ -44,25 +44,29 @@ iotClient.controller('CarteController', [
     });
 
     $rootScope.$on('selectGpio', function(event, arg) {
-        // Thing.getThing(arg[0], arg[1], function(data){
-        //     $scope.thing = data;
-        //     console.log($scope.thing)
-        // })
-        Thing.getGpio($scope, arg);
+        Thing.getThing(arg[1], arg[2], function(data){
+            $scope.thing = data;
+            console.log($scope.thing)
+        })
+        Thing.getGpio($scope, arg[0]);
+
         Template.change('gpioInfos', $scope)
         // console.log($scope.slugGpio);
-    });
+        })
+    ;
 
     $scope.putThing = function()
     {
         Thing.putThing(this.thing);
         console.log(this.thing)
+        $('.modal').modal('hide');
     }
 
     $scope.putGpio = function(slug)
     {
         Thing.putGpio(slug, $scope, this.gpio);
         console.log(this.gpio)
+        $('.modal').modal('hide');
     }
 
 }]);

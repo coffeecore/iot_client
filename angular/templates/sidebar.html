@@ -10,7 +10,7 @@
         {{carte.connection}}
         <ul ng-if="ok">
             <li ng-if="gpio.name" ng-repeat="gpio in thin.gpios">
-                <a href="#" ng-click="$emit('selectGpio', gpio.slug)">{{ gpio.name }}</a>
+                <a href="#" ng-click="$emit('selectGpio', [gpio.slug, thin.connection.address, thin.connection.port])">{{ gpio.name }}</a>
             </li>
         </ul>
     </li> 
