@@ -1,3 +1,7 @@
+Array.prototype.insert = function (index, item) {
+    this.splice(index, 0, item);
+};
+
 var iotClient = angular.module('iotClient',[]);
 
 var templateDir = '/angular/templates/'
@@ -44,7 +48,36 @@ iotClient.factory('Thing', function ($http) {
                     "status_code" : status,
                     "message" : data
                 });
-            });
+            })
+        },
+        putThing: function(th, the)
+        {
+            $http(
+                {
+                    method: 'PUT',
+                    url: 'http://'+conf.address+':'+conf.port+'/thing',
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
+                    data:
+                    {
+                        "thing" : th
+                    }
+                }
+            )
+            .success(function(data, status, headers, config)
+            {
+                console.log('SUCCESS');
+                console.log(data);
+                console.log(status);
+            })
+            .error(function(data, status, headers, config)
+            {
+                console.log('ERROR')
+                console.log(data);
+                console.log(status);
+            })
         },
         createCarte : function(scope)
         {

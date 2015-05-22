@@ -3,11 +3,13 @@
     <li>
         <button class="btn btn-default" ng-click="" data-toggle="modal" data-target="#myModal">+ Ajouter une carte</button>
     </li>
-    <li ng-repeat="carte in cartesList">
+    <li ng-if="thin.name" ng-repeat="thin in thing">
         <!-- <button class="btn btn-default" ng-click="$emit('selectCarte', [carte.connection.address, carte.connection.port])">{{carte.name}}</button> -->
-        <button class="btn btn-default" ng-click="$emit('selectCarte', [carte.connection.address, carte.connection.port])">{{carte.name}}</button>
-        <ul ng-if="thing.gpios">
-            <li ng-repeat="gpio in thing.gpios | filter : thing.slug : comparator">
+        <button class="btn btn-default" ng-click="$emit('selectCarte', [thin.name, thin.connection.address, thin.connection.port])">{{thin.name}}</button>
+        <!-- <button class="btn btn-default" ng-click="$emit('selectCarte', [thin.name, thin.connection.address, thin.connection.port])">{{carte.name}}</button> -->
+        {{carte.connection}}
+        <ul ng-if="thin.gpios">
+            <li ng-repeat="gpio in thin.gpios">
                 <a href="#" ng-click="$emit('selectGpio', gpio.slug)">{{ gpio.name }}</a>
             </li>
         </ul>

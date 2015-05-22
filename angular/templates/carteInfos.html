@@ -1,5 +1,5 @@
 <div ng-if="thing">
-    <form class="form-group" ng-submit="putThing()">
+    <form class="form-group" ng-submit="putThing(); $emit('putThing', thing.name);">
         {{ thing.name }}
         <input type="text" class="form-control" ng-model="thing.name"/>
         <input type="text" class="form-control" ng-model="thing.description"/>

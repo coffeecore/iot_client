@@ -1,20 +1,37 @@
-iotClient.controller('SidebarController', ['$scope', '$http', '$filter', 'Thing', function($scope, $http, $filter, Thing)
+iotClient.controller('SidebarController', ['$scope', '$http', '$filter', '$rootScope', 'Thing', function($scope, $http, $filter, $rootScope, Thing)
 {
-    $http.get('/conf/connections.json')
+    $scope. thing = []
+    $http.get('../../conf/connections.json')
     .success(function(data)
     {
         console.log('SUCCESS');
 
         $scope.fileConf = data;
 
-        $scope.cartesList = $scope.fileConf.configurationServer;
+        $scope.fileConf.configurationServer;
+        // console.log($scope.fileConf.configurationServer)
     })
     .error(function(data, status)
     {
         console.log('ERROR');
         console.log(data);
         console.log(status)
-    });
+    })
+    .then(function(a, b){
+                // console.log($scope.fileConf.configurationServer)
+
+    // $scope.cartesList = [$scope.fileConf.configurationServer[0]];
+    // console.log($scope.cartesList)
+    // $scope.fileConf.configurationServer[0].connection
+    Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
+        data.connection = $scope.fileConf.configurationServer[0].connection
+        $scope.thing.push(data);
+        console.log($scope.thing)
+        })
+    })
+    
+// })
+
     $scope.creercarte = {}
     // $scope.getThing = getThing;
     // $scope.getThing = function(address, port)
@@ -64,13 +81,17 @@ iotClient.controller('SidebarController', ['$scope', '$http', '$filter', 'Thing'
     }
 
 
-     $scope.$on('selectCarte', function(event, arg)
+     $rootScope.$on('putThing', function(event, arg)
      {
-        Thing.getThing(arg[0], arg[1], function(data){
-            $scope.thing = data;
+        alert('FUCK')
+        Thing.getThing($scope.fileConf.configurationServer[0].connection.address, $scope.fileConf.configurationServer[0].connection.port, function(data){
+            data.connection = $scope.fileConf.configurationServer[0].connection
+            $scope.thing[0].name = arg;
             console.log($scope.thing)
         })
-    });
+    })
+     // $scope.thing = $filter('filter')($scope.cartesList.name, arg, true)
+    // });
 
      // TODO event update
 

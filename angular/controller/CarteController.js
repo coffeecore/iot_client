@@ -17,8 +17,10 @@ iotClient.controller('CarteController', [
     )
 {
     $rootScope.$on('selectCarte', function(event, arg) {
-        Thing.getThing(arg[0], arg[1], function(data){
+        Thing.getThing(arg[1], arg[2], function(data){
             $scope.thing = data;
+        // })
+
             if(undefined != $scope.thing.status_code)
             {
                 alert('UZ')
@@ -40,7 +42,6 @@ iotClient.controller('CarteController', [
         // {
         //     Template.change('infosGpio', $scope)
         // }
-        console.log($scope.template);
 
     });
 
@@ -53,5 +54,11 @@ iotClient.controller('CarteController', [
         Template.change('gpioInfos', $scope)
         // console.log($scope.slugGpio);
     });
+
+    $scope.putThing = function()
+    {
+        Thing.putThing(this.thing);
+        console.log(this.thing)
+    }
 
 }]);
