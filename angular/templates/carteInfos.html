@@ -20,10 +20,10 @@
         </thead>
         <tbody>
             <tr ng-repeat="gpio in thing.gpios">
-                <th>{{ $index }}</th>
+                <th>{{ $index+1 }}</th>
                 <th>{{ gpio.name }}</th>
                 <th>{{ gpio.pin }}</th>
-                <th>{{ gpio.value }}</th>               
+                <th>{{ gpio.val }}</th>               
             </tr>
         </tbody>
       </table>
