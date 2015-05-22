@@ -1,8 +1,8 @@
 <h1>IOT Client</h1>
 <ul class="list-unstyled">
-    <li>
+    <!--li>
         <button class="btn btn-default" ng-click="" data-toggle="modal" data-target="#myModal">+ Ajouter une carte</button>
-    </li>
+    </li-->
     <li ng-if="thin.name" ng-repeat="thin in thing">
         <!-- <button class="btn btn-default" ng-click="$emit('selectCarte', [carte.connection.address, carte.connection.port])">{{carte.name}}</button> -->
         <button class="btn btn-default" ng-click="$emit('selectCarte', [thin.name, thin.connection.address, thin.connection.port])">{{thin.name}}</button>
